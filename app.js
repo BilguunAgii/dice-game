@@ -69,7 +69,7 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
     document.getElementById("score-" + activePlayer).textContent =
       scores[activePlayer];
     // Уг тоглогч хожсон эхэсийг шалгах(100 ихгүй байх)
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       // тоглоомыг дууссан төлвт оруулна.
       isNewGame = false;
       document.getElementById("name-" + activePlayer).textContent = "Winner";
