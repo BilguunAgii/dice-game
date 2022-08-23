@@ -1,21 +1,36 @@
-// Тоглогчийн хадгалах хувьсагч, нэгдүгээр тоглогчийг 0, 2-р тоглогчийг 1 гэе
-var activePlayer = 0;
-// Тоглогчдийн цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 0];
-// Тоглогчийн ээлжиндээ цуглуулсан оноог хадгалах хувьсагч
-var roundScore = 0;
-// Шооны аль талаараа бууусныг хадгалах хувьсагч, 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
-
-// Тоглоом эхлэх үеийг бэтлгэх
-document.getElementById("score-0").textContent = "0";
-window.document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").innerHTML = "0";
-window.document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").innerHTML = "0";
-
 // Global diceDom зарлаж байна.
+// Тоглогчийн хадгалах хувьсагч, нэгдүгээр тоглогчийг 0, 2-р тоглогчийг 1 гэе
+var activePlayer;
+// Тоглогчдийн цуглуулсан оноог хадгалах хувьсагч
+var scores;
+// Тоглогчийн ээлжиндээ цуглуулсан оноог хадгалах хувьсагч
+var roundScore;
+
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
+initGame();
+function initGame() {
+  activePlayer = 0;
+  scores = [0, 0];
+  roundScore = 0;
+
+  // Тоглоом эхлэх үеийг бэтлгэх
+  document.getElementById("score-0").textContent = "0";
+  window.document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").innerHTML = "0";
+  window.document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").innerHTML = "0";
+
+  //Тоглогчдийн нэрийг буцаах
+  document.getElementById("name-0").textContent = "Player 1";
+  document.getElementById("name-1").textContent = "Player 2";
+
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-0-panel").classList.add("active");
+  diceDom.style.display = "none";
+}
 
 // btn-Roll дарахад буух шооны зураг болон санамсаргүй байдал.
 document.querySelector(".btn-roll").addEventListener("click", function () {
@@ -31,8 +46,8 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
   } else {
     // 1 буусан тул тоглогчийн ээлжийг сольж өгнө
     // Энэ тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно.
-    // DRY dont repeat yourself
-    switchToNextPlayer();
+
+    switchToNextPlayer(); // DRY dont repeat yourself
   }
 });
 
@@ -76,6 +91,4 @@ function switchToNextPlayer() {
 }
 
 // Шинэ тоглоом эхлүүлэх товчний эвэнт литенер
-document.querySelector(".btn-new").addEventListener("click", function () {
-  alert("click");
-});
+document.querySelector(".btn-new").addEventListener("click", initGame);
